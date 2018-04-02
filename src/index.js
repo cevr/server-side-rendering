@@ -8,7 +8,7 @@ import renderer from './helpers/renderer';
 import createServerStore from './helpers/createServerStore';
 
 const app = express();
-const PORT = 4000;
+const PORT = 3000;
 
 //every request with /api gets proxied to the api server
 //this is to allow server to have access to cookies
@@ -17,6 +17,7 @@ app.use(
     proxy('http://react-ssr-api.herokuapp.com', {
         proxyReqOptDecorator(opts) {
             opts.headers['x-forwarded-host'] = 'localhost:3000';
+            return opts;
         }
     })
 );
