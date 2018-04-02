@@ -8,10 +8,20 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { renderRoutes } from 'react-router-config';
+import axios from 'axios';
 
 import reducers from './redux/reducers/index';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const axiosInstance = axios.create({
+    baseURL: '/api'
+});
+
+//inject state from the server side rendering, in order to prevent second fetch if unnecessary
+const store = createStore(
+    reducers,
+    window.INITIAL_STATE,
+    applyMiddleware(thunk.withExtraArgument(axiosInstance))
+);
 
 const Root = () => {
     return (

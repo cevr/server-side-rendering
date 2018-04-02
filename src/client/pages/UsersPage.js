@@ -4,7 +4,7 @@ import { fetchUsers } from '../redux/reducers/actions';
 
 class UsersList extends Component {
     componentDidMount() {
-        this.props.fetchUsers();
+        this.props.users || this.props.fetchUsers();
     }
 
     renderUsers() {
