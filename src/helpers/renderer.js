@@ -6,11 +6,11 @@ import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 import Routes from '../client/Routes';
 
-export default ({ path }, store) => {
+export default ({ path }, store, context) => {
     //render everything first, then stringify it so the browser can immediately render non-javascript code
     const content = renderToString(
         <Provider store={store}>
-            <StaticRouter location={path} context={{}}>
+            <StaticRouter location={path} context={context}>
                 <div>{renderRoutes(Routes)}</div>
             </StaticRouter>
         </Provider>
@@ -23,7 +23,6 @@ export default ({ path }, store) => {
             <head>
             <!-- Compiled and minified CSS -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-        
             </head>
             <body>
                 <div id="root">${content}</div>

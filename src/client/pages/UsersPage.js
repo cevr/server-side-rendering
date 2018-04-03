@@ -4,8 +4,8 @@ import { fetchUsers } from '../redux/actions';
 
 class UsersList extends Component {
     componentDidMount() {
-        console.log('hey');
-        this.props.fetchUsers();
+        const { users, fetchUsers } = this.props;
+        fetchUsers();
     }
 
     renderUsers() {
